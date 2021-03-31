@@ -1,9 +1,21 @@
 package co.edu.iudigital.app.service.iface;
 
-import java.util.List;
+
 import co.edu.iudigital.app.model.entity.User;
 
 public interface UserService {
-	public List<User> getAll();
+	/**
+	 * Crear nuevo usuario
+	 * @param user
+	 */
+	public  void create(User user);
+	
+	/**
+	 * Loguea un usuario
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
+	public User login(User user) throws Exception;
 
 }
