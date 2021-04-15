@@ -1,9 +1,12 @@
 package co.edu.iudigital.app.service.impl;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.iudigital.app.model.entity.User;
+import co.edu.iudigital.app.model.repository.ProfileRepository;
 import co.edu.iudigital.app.model.repository.UserRepository;
 import co.edu.iudigital.app.service.iface.UserService;
 
@@ -11,11 +14,21 @@ import co.edu.iudigital.app.service.iface.UserService;
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository userRepository; 
+	
+	@Autowired
+	private ProfileRepository profileRepository;
 	
 	@Override
 	public  void create(User user) {
 		//TODO implementar
+		boolean existsProfiler = profileRepository.existsById(user.getProfile_id().getId());
+		if (existsProfiler) {
+			user.setCreate_At(LocalDateTime.now());
+			userRepository.save(user);
+		}		
+				
+		
 	}
 	
 	@Override
